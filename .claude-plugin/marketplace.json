@@ -1,0 +1,17 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "worth-asking",
+  "description": "Worth Asking — review meeting transcripts and surface the questions you missed asking.",
+  "owner": {
+    "name": "Rachael Quisel"
+  },
+  "plugins": [
+    {
+      "name": "worth-asking",
+      "description": "Review meeting transcripts and surface the questions you missed asking. Returns evidence-backed questions tied to exact excerpts, not diagnoses or draft messages.",
+      "source": "./",
+      "category": "productivity",
+      "homepage": "https://github.com/RachaelQuisel/worth-asking"
+    }
+  ]
+}
