@@ -1,6 +1,6 @@
 {
   "name": "worth-asking",
-  "description": "Review meeting transcripts and surface the questions you missed asking. Returns evidence-backed questions tied to exact excerpts, not diagnoses or draft messages.",
+  "description": "Reads your meeting transcripts and gives you back the questions you didn't ask. Each one comes with the exact excerpt that prompted it, not a guess about what anyone meant.",
   "version": "1.0.0",
   "author": {
     "name": "Rachael Quisel"
