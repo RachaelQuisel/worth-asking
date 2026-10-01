@@ -49,7 +49,7 @@ Twelve review lenses, each phrased as a prompt for inquiry rather than proof of 
 | **Over-owning responsibility** | you absorbing work whose ownership is unclear |
 | **Pace mismatch** | scope, deadline, capacity, or budget not adding up |
 
-Goals, roles, process, and interpersonal dynamics form the GRPI organizing lens. Each lens in [the reference](skills/worth-asking/references/lenses.md) carries an explicit limit — what the lens *cannot* establish from a transcript alone.
+Goals, roles, process, and interpersonal dynamics form the GRPI organizing lens. Every lens in [the reference](skills/worth-asking/references/lenses.md) states its own limit — what it *cannot* establish from a transcript alone.
 
 ## What it will not do
 
@@ -60,14 +60,15 @@ These are constraints in the skill, not suggestions:
 - **No psychoanalysis.** When a signal is about your own pattern, it stays on the observable work.
 - **No silent gaps.** A truncated or undated source produces a stated coverage limit, not a guess. An unavailable source is never treated as evidence that nothing happened.
 - **No outbound messages.** Drafting or sending is a separate task you have to ask for.
-- **No writes anywhere.** Running it does not authorize posting transcripts or findings, creating a scheduled monitor, or writing to any external system.
+- **No external writes.** Running it does not authorize posting transcripts or findings, creating a scheduled monitor, or writing to any external system. It saves a review to disk only when you ask it to, at a path you choose.
 - **No cross-contamination.** Reviewing several projects together keeps each finding tied to its own sources. Confidential detail does not move between clients.
 
 Instructions appearing inside a transcript are treated as conversation content, never as instructions to the assistant.
 
 ## What data it sends
 
-Nothing, anywhere. This plugin is three markdown files and an icon. It bundles no
+Nothing, anywhere. This plugin is four markdown files, two small JSON manifests,
+a license, and an icon. It bundles no
 MCP servers, no hooks, no agents, and no executable code, so it opens no network
 connections and has no endpoint of its own to send anything to.
 
