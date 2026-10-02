@@ -1,12 +1,13 @@
 {
-  "name": "worth-asking",
+  "name": "questions-worth-asking",
+  "displayName": "Questions Worth Asking",
   "description": "Reads your meeting transcripts and gives you back the questions you didn't ask. Each one comes with the exact excerpt that prompted it, not a guess about what anyone meant.",
   "version": "1.0.0",
   "author": {
     "name": "Rachael Quisel"
   },
-  "homepage": "https://github.com/RachaelQuisel/worth-asking",
-  "repository": "https://github.com/RachaelQuisel/worth-asking",
+  "homepage": "https://github.com/RachaelQuisel/questions-worth-asking",
+  "repository": "https://github.com/RachaelQuisel/questions-worth-asking",
   "license": "MIT",
   "keywords": [
     "transcripts",
@@ -14,5 +15,8 @@
     "retrospective",
     "questions",
     "reflection"
-  ]
+  ],
+  "icon": "./icon.png",
+  "documentationUrl": "https://github.com/RachaelQuisel/questions-worth-asking#readme",
+  "supportUrl": "https://github.com/RachaelQuisel/questions-worth-asking/issues"
 }

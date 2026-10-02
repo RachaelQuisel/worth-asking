@@ -1,17 +1,17 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "worth-asking",
-  "description": "Worth Asking: the questions you didn't ask, pulled out of your own meeting transcripts.",
+  "name": "questions-worth-asking",
+  "description": "Questions Worth Asking: the questions you didn't ask, pulled out of your own meeting transcripts.",
   "owner": {
     "name": "Rachael Quisel"
   },
   "plugins": [
     {
-      "name": "worth-asking",
+      "name": "questions-worth-asking",
       "description": "Reads your meeting transcripts and gives you back the questions you didn't ask. Each one comes with the exact excerpt that prompted it, not a guess about what anyone meant.",
       "source": "./",
       "category": "productivity",
-      "homepage": "https://github.com/RachaelQuisel/worth-asking"
+      "homepage": "https://github.com/RachaelQuisel/questions-worth-asking"
     }
   ]
 }

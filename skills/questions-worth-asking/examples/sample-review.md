@@ -22,7 +22,7 @@ This is invented material to demonstrate the skill. It is not a client transcrip
 
 ## Sample output
 
-# Worth Asking
+# Questions Worth Asking
 
 Sources: Planning meeting, March 2; check-in, March 5. Both are fictional excerpts supplied in this example.
 

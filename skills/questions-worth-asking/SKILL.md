@@ -1,9 +1,9 @@
 ---
-name: worth-asking
+name: questions-worth-asking
 description: Find useful questions missed in a conversation or across related transcripts. Use for a transcript review, end-of-day or post-meeting reflection, or requests such as "worth asking", "dissonance radar", "what am I missing?", "what didn't I ask?", or "what changed between these meetings?" Return evidence-backed questions rather than diagnoses or outbound messages.
 ---
 
-# Worth Asking
+# Questions Worth Asking
 
 Help the user notice a mismatch, unanswered question, or meaningful change that could affect their next decision. Produce questions for reflection or discussion. Do not assume another person's motives, emotions, or intentions.
 
@@ -55,7 +55,7 @@ Read [references/lenses.md](references/lenses.md) for examples and borderline ca
 Use this structure, scaling the length to the request:
 
 ```markdown
-# Worth Asking
+# Questions Worth Asking
 Sources: [Source titles or filenames and known meeting dates]
 Coverage: [Relevant missing context, if any]
 

@@ -1,6 +1,6 @@
-# Worth Asking
+# Questions Worth Asking
 
-Worth Asking reads your meeting transcripts and gives you back the questions you
+Questions Worth Asking reads your meeting transcripts and gives you back the questions you
 didn't ask.
 
 I built it for a specific failure. A stakeholder goes quiet for a month. Two
@@ -14,15 +14,15 @@ assess your relationships, and doesn't write messages for you to send.
 ## Install
 
 ```
-/plugin marketplace add RachaelQuisel/worth-asking
-/plugin install worth-asking
+/plugin marketplace add RachaelQuisel/questions-worth-asking
+/plugin install questions-worth-asking
 ```
 
 ## Use
 
 Paste a transcript, point at files, or ask for a comparison:
 
-- "Run worth-asking on this transcript."
+- "Run questions-worth-asking on this transcript."
 - "What didn't I ask in this meeting?"
 - "What changed between these two calls?"
 - "End-of-day review on today's notes."
@@ -42,7 +42,7 @@ Each question comes with four things:
 - Why the answer could change a decision.
 - One concrete next move.
 
-Here is [a full fictional example](skills/worth-asking/examples/sample-review.md).
+Here is [a full fictional example](skills/questions-worth-asking/examples/sample-review.md).
 
 ## The lenses
 
@@ -64,7 +64,7 @@ There are twelve. Each one is a prompt for inquiry, not proof of a problem.
 | Pace mismatch | Scope, deadline, capacity, or budget don't add up. |
 
 Goals, roles, process, and interpersonal dynamics make up the GRPI organizing
-lens. Every lens in [the reference](skills/worth-asking/references/lenses.md)
+lens. Every lens in [the reference](skills/questions-worth-asking/references/lenses.md)
 states its own limit. The limit says what that lens cannot establish from a
 transcript by itself.
 
