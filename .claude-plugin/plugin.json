@@ -1,7 +1,7 @@
 {
   "name": "questions-worth-asking",
   "displayName": "Questions Worth Asking",
-  "description": "Reads your meeting transcripts and gives you back the questions you didn't ask. Each one comes with the exact excerpt that prompted it, not a guess about what anyone meant.",
+  "description": "Finds the questions you didn't ask. Paste a meeting transcript and get three to seven ranked questions, each tied to the exact excerpt that produced it, across twelve review lenses.",
   "version": "1.0.0",
   "author": {
     "name": "Rachael Quisel"

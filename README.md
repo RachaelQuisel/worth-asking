@@ -1,15 +1,26 @@
 # Questions Worth Asking
 
-Questions Worth Asking reads your meeting transcripts and gives you back the questions you
-didn't ask.
+Finds the questions you didn't ask, in meetings you already had.
 
-I built it for a specific failure. A stakeholder goes quiet for a month. Two
-people give you opposite instructions in the same hour. You raise something and
-it gets deflected, and you move on. None of it registers while you're in the
-call. It's all sitting in the transcript.
+A stakeholder goes quiet for a month. Two people give you opposite instructions
+in the same hour. You raise something, it gets deflected, you move on. None of it
+registers while you're in the call. All of it is sitting in the transcript.
 
-The skill returns questions. It doesn't tell you what anyone meant, doesn't
-assess your relationships, and doesn't write messages for you to send.
+Paste the transcript. Get back three to seven ranked questions, each one tied to
+the exact line that produced it.
+
+- Reads across twelve lenses: unanswered questions, conflicting instructions,
+  unclear ownership, pace mismatches, and eight more
+- Quotes the exact excerpt behind every question, so you can check it yourself
+- Ranks by what could change your next decision, not by what sounds dramatic
+- Compares two or more transcripts when you want to know what shifted
+- Says it found nothing when it found nothing, instead of inventing a concern
+
+How it works: paste the transcript, read the ranked questions, walk into the next
+conversation with them. No setup, no account, no configuration.
+
+It returns questions. It doesn't tell you what anyone meant, doesn't assess your
+relationships, and doesn't write messages for you to send.
 
 ## Install
 

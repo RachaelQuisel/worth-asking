@@ -8,7 +8,7 @@
   "plugins": [
     {
       "name": "questions-worth-asking",
-      "description": "Reads your meeting transcripts and gives you back the questions you didn't ask. Each one comes with the exact excerpt that prompted it, not a guess about what anyone meant.",
+      "description": "Finds the questions you didn't ask. Paste a meeting transcript and get three to seven ranked questions, each tied to the exact excerpt that produced it, across twelve review lenses.",
       "source": "./",
       "category": "productivity",
       "homepage": "https://github.com/RachaelQuisel/questions-worth-asking"
