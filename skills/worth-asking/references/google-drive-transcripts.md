@@ -4,11 +4,11 @@ Use this procedure for manual Drive inputs and scheduled transcript recovery. Sc
 
 ## Account and discovery
 
-- Use the connected Google Drive tools for Rachael's work account, `rachael@xray.tech`. Check account identity when the connector exposes it. Do not silently substitute a personal account. If identity is unavailable, require an explicitly supplied work folder/file or metadata establishing the work source; otherwise report that source access is unverified.
-- Rachael supplied this approved transcript root: https://drive.google.com/drive/folders/1kCAs4S_Y-X_xpHncm2iB2UD_DvqwkWYD (folder ID `1kCAs4S_Y-X_xpHncm2iB2UD_DvqwkWYD`). Use it and its discovered descendant folders for scheduled Drive recovery. This explicit designation establishes the intended work source, but does not establish connector access.
+- Use the connected Google Drive tools for the operator's work account, `you@example.com`. Check account identity when the connector exposes it. Do not silently substitute a personal account. If identity is unavailable, require an explicitly supplied work folder/file or metadata establishing the work source; otherwise report that source access is unverified.
+- Use the approved transcript root the operator supplied for the work account (for example, folder ID `YOUR_DRIVE_FOLDER_ID`). Use it and its discovered descendant folders for scheduled Drive recovery. This explicit designation establishes the intended work source, but does not establish connector access.
 - List the root and relevant subfolders, following pagination. Match using client name, meeting title, and meeting date, including common title/date variants. Do not use owner-only filters, which can exclude shared work transcripts. A parent filter covers direct children only; traverse discovered subfolders when needed.
 - Initial access check returned HTTP 404 `NOT_FOUND`; a parent-scoped search returned no files. Access and complete transcript retrieval remain unverified. Retry the root on subsequent runs. If it remains inaccessible, report the connector/account-access failure without treating it as an empty folder or broadening to unrelated Drive locations.
-- Restrict scheduled recovery to CCRES and Guardians of Love, within the contract's discovery/comparison windows or an existing pending meeting. Do not read unrelated files. Follow pagination when needed.
+- Restrict scheduled recovery to the allowlisted clients (for example, Client A and Client B), within the contract's discovery/comparison windows or an existing pending meeting. Do not read unrelated files. Follow pagination when needed.
 - Match client, meeting title, and actual meeting date; use calendar/recording IDs, attendees, and transcript contents to disambiguate. Date alone or file modification time is insufficient. If multiple candidates remain plausible, fail that meeting rather than guess.
 
 ## Complete evidence
