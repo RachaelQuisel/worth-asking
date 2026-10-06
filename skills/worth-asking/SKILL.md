@@ -1,85 +1,106 @@
 ---
 name: worth-asking
-description: Surface high-leverage questions Rachael missed asking in one conversation or across recent client transcripts. Use when Rachael says "worth asking," "dissonance radar," "EOD review," "evening wrap-up," "what am I missing," "what didn't I ask," "what shifted today," "what should I be curious about," "review today's transcripts," or "did anything change today"; or when operating or debugging the scheduled Codex Worth Asking.
+description: >-
+  Surface high-leverage questions missed in a client meeting transcript or across recent client transcripts. Use when the user asks for worth asking, dissonance radar, an EOD review, or an evening wrap-up of client transcripts; asks what they are missing in a client transcript, what they did not ask a client, what shifted in today's client meetings, what to be curious about after a client call, or to review today's transcripts; or when operating or debugging the scheduled Codex Worth Asking automation. Not for code, stack traces, or general questions that are not about a client conversation.
 ---
 
 # Worth Asking
 
 ## Why this exists
 
-Rachael's default mode is "radical agency" — she assumes any friction is hers to fix, takes on blame that isn't only hers, and doesn't ask the questions that would surface the actual dynamic. The classic miss: a stakeholder dropped out of meetings for a month and she didn't ask why. Turned out the stakeholder was frustrated with the build. She found out two weeks later via NotebookLM mining the transcripts.
+The operator's default is radical agency: any friction looks like theirs to fix, so they take on blame that is only partly theirs and skip the question that would surface the actual dynamic. The classic miss is a stakeholder who drops out of meetings and is never asked why. The skill is the pause that catches that miss. **It produces questions, not statements.** Inward questions ("what should I be noticing?") and outward questions ("what should I ask this stakeholder?") only. Never drafts of outbound communication. The point is to spark dialogue, not to send a message.
 
-The skill is the pause button that catches what her default misses. **It produces questions, not statements.** Inward questions ("what should I be noticing?") and outward questions ("what should I ask Casandra?") — never drafts of outbound communication. The point is to spark dialogue, not to send messages.
+## Private config
+
+At the start of every run, load settings:
+
+```bash
+python3 skills/worth-asking/scripts/load_config.py
+```
+
+Run that from the plugin root, or pass the config path as the first argument. The loader also checks `WORTH_ASKING_CONFIG`, `./config.local.yaml`, the plugin root, the skill directory, and `~/.config/worth-asking/config.local.yaml`.
+
+- **`mode` is `generic`.** The private file is missing. Follow `behavior` from the loader. Review only a transcript pasted in the conversation or a file path the user names. Do not invent clients, accounts, channels, or home paths. Do not search Drive, post to Slack, write a brief to a home directory, or run the scheduled automation. Return the questions in the conversation. An empty radar is still valid.
+- **`mode` is `configured`.** Use only the lists, accounts, channels, and paths in that JSON. `config.example.yaml` is a template of fake placeholders. Never treat it as the client list.
+- **The loader exits non-zero, or `mode` is `error`.** Stop. Say the private config could not be read. Do not guess clients or accounts.
+
+`manual_clients` is who a local no-input run may discover. `scheduled_clients` is who the automation may post for. The manual list may be longer. That difference is intentional: a client can be reviewed by hand and still be excluded from scheduled posting. Do not auto-post a manual-only client.
+
+`pattern_notes`, when present, are private calibration. Use them to recognize a pattern. Do not repeat a note verbatim unless the user asked to see it. If the list is empty, or the mode is generic, use only the generic lenses and do not invent personal history.
+
+Address the operator by `operator_name` when it is set. Otherwise say "you".
 
 ## When to run
 
-- **Manually:** any time Rachael wants a check on a conversation she just had ("run the radar on this transcript") or a sweep of the day ("EOD review")
-- **Scheduled:** autonomously in the Codex automation at 2:00 AM and 10:00 AM Pacific (5:00 AM and 1:00 PM Eastern), using a 14-day discovery recovery window, a durable pending ledger, and seven days of comparison context. See "Codex automation" below.
+- **Manually:** a check on one conversation ("run the radar on this transcript") or a sweep of the day's client transcripts ("EOD review").
+- **Scheduled:** only when mode is `configured` and the user is operating or debugging the automation. Read [automation ops](references/automation-ops.md) then, not for an ordinary transcript review. The schedule, ledger, and delivery rules live there. The automation file at `paths.automation_toml` is the source of truth when it exists.
 
 ## Input modes
 
-The skill accepts any of:
+Use whichever of these the loaded config actually allows:
 
-1. **Pasted transcript text** — Rachael drops a transcript directly in the prompt
-2. **File path(s)** — e.g. `~/Claude-Work/CLIENTS/CCRES_Dylan_Sumser/Transcripts/CCRES-Transcript-2026-08-25-XRAY_CCRES_Weekly.md`
-3. **Auto-discover recent (manual/local)** — when run with no input locally, run `~/Claude-Work/PROJECTS/dissonance-radar/prepare_sources.py`. It syncs Debrief first and returns files by meeting date for exactly CCRES, Coding Clarified, and Guardians of Love.
-4. **Google Drive** — autonomously discover and retrieve transcripts accessible through the connected `rachael@xray.tech` work account. Read [Drive transcript recovery](references/google-drive-transcripts.md) before using Drive.
-5. **Date-specific** — pass the requested date as both `--cutoff` and `--through` to `prepare_sources.py`
+1. **Pasted transcript text.** Always available.
+2. **File path(s) the user names in this conversation.** Always available. Do not browse the home directory looking for more.
+3. **Auto-discover recent (manual/local).** Only in configured mode, and only when `paths.prepare_sources` exists. The script is not bundled. If it is missing, skip discovery and ask for a pasted transcript or a path. Discovery is limited to `manual_clients`.
+4. **Google Drive.** Only in configured mode, and only when `work_email` and `drive_folder_id` are set. Read [Drive transcript recovery](references/google-drive-transcripts.md) first. If those fields are empty, do not search Drive.
+5. **Date-specific.** When the prepare script exists, pass the requested date as both `--cutoff` and `--through`.
 
-If multiple transcripts exist for today, process them as ONE batch so cross-client patterns can surface (the same stakeholder vocabulary showing up across two clients, for example).
+If several of today's client transcripts are in scope, process them as one batch so a pattern that shows up in two clients can surface.
 
-**Scheduled source scope.** Debrief in connected Airtable supplies meeting metadata and durable record IDs. Complete transcripts may come from Debrief or verified matching Google Drive files. When Debrief text is missing or incomplete, recover it from Drive before declaring a source failure. Connected Google Calendar is a coverage source only: the automation compares completed allowlisted calendar meetings with Debrief so an omitted transcript cannot disappear silently. Calendar metadata never generates Radar findings. The Codex automation inventories a 14-day recovery window by meeting date, inclusive from today minus 13 days through today, and records eligible Debrief IDs in `/Users/rachaelquisel/.codex/automations/dissonance-radar/state.json`. Unposted IDs remain pending until Slack confirms delivery, even after they leave the recovery window. Successfully posted meetings from the last seven days provide comparison context. Its allowlist is exactly CCRES and Guardians of Love. Do not add other clients, glob local folders, use modified time as the conversation date, or treat Meeting Prep as a transcript source. An unresolved source failure is a failed client result, not an empty radar; continue unaffected clients. A malformed ledger blocks all posting. Read [Drive transcript recovery](references/google-drive-transcripts.md) for account checks, matching, completeness, and meetings absent from Debrief.
+**Scheduled source scope** applies only in configured mode. Details, including the recovery window, the ledger, and what to do when a script is missing, are in [automation ops](references/automation-ops.md). Calendar metadata never generates findings. An unresolved source failure is a failed client result, not an empty radar. Continue unaffected clients. A malformed ledger blocks all posting.
 
-**Meta-conversations are a valid input mode too.** Rachael's coaching sessions, retros, or solo reflection notes can also feed the radar — when the source IS a conversation about other conversations, expect the output to lean toward inward questions ("what should I be noticing?") rather than outward ones ("what should I ask Casandra?"). Both shapes are fine.
+**Meta-conversations are valid input too.** A coaching session, retro, or solo note can feed the radar. When the source is a conversation about other conversations, lean toward inward questions. Both shapes are fine.
 
-## The lenses (apply each one to the transcript)
+## The lenses
 
-Full pattern catalog is in `references/lenses.md`. Load it when needed. Brief version:
+The catalog is in [lenses](references/lenses.md). Load it when a signal is borderline. Brief version:
 
-### GRPI — every conflict traces to one of four roots (Evan Michner's framework, 2026-06-04)
+### GRPI — conflict traces to one of four roots
 
-- **G — Goals.** Are people working toward the same outcome? "My goal is new customers, yours is keep existing customers" — looks aligned until effort allocation comes up.
-- **R — Roles.** Does everyone know whose job is what? "I thought that was your job" / "She doesn't have the technical ability but is making technical calls."
-- **P — Process.** Is there a shared method? "We don't have a way to capture decisions" / "Every meeting we start from scratch."
-- **I — Interpersonal.** Is there friction between specific people that isn't about the work? Usually a downstream consequence of G/R/P breakdowns, but sometimes the root.
+- **G — Goals.** Are people working toward the same outcome? Two goals can look aligned until effort has to be split.
+- **R — Roles.** Does everyone know whose job is what?
+- **P — Process.** Is there a shared method for decisions, or does every meeting start over?
+- **I — Interpersonal.** Is there friction between specific people that is not about the work? Often downstream of G, R, or P. Sometimes the root.
 
-### Rachael-specific dissonance patterns (the things her default mode misses)
+### Default-mode patterns
 
-- **Disappearance.** Someone who was in the last N meetings isn't in this one. The skill asks: *"Where did [X] go? Are they OK with the current direction?"* — **but only if they were on the invite list to begin with.** Many of Rachael's client meetings are 1:1 by design (e.g. Rachael ↔ Jessica at GoL). If an operational stakeholder was never expected to attend, don't apply this lens; surface them as an *ask* instead ("how does [X] hear about this change?").
-- **In-meeting disagreement.** Two stakeholders contradict each other in the same transcript — Rachael often doesn't register this in the moment.
-- **Sentiment shift.** Someone who was enthusiastic last week is curt this week, or vice versa. Tone-change is information.
-- **Topic avoided.** Something Rachael raised got deflected or buried. Was that on purpose?
-- **New vocabulary.** A new term or framing enters the conversation that wasn't there before — sometimes signals a priority shift the speaker hasn't named yet.
-- **Commit drift.** Rachael said she'd do something last week and the transcript shows it didn't happen. Why?
-- **Radical-agency tell.** Rachael takes on blame in the transcript that isn't only hers ("I should have known," "that was on me"). Flag for self-review — is there a question she should have asked instead?
-- **Pace mismatch.** Client expects faster delivery than the scope allows, but Rachael is absorbing the gap by working until 2am. The transcript shows the gap without the gap getting named.
+These are the misses radical agency tends to skip. They are generic. Do not add a personal history that is not in the transcript or in `pattern_notes`.
+
+- **Disappearance.** Someone from the last few meetings is absent. Ask where they went only if they were expected to attend. Many meetings are one-to-one by design. If an operational stakeholder was never on the invite, do not call it disappearance. Ask how they hear about the change.
+- **In-meeting disagreement.** Two stakeholders contradict each other and it goes unmarked.
+- **Sentiment shift.** The same person is enthusiastic one week and curt the next. Tone change is information.
+- **Topic avoided.** Something raised was deflected or buried.
+- **New vocabulary.** A new term shows up and may be an unnamed priority shift.
+- **Commit drift.** A commitment from last week is undone, and nobody mentions it.
+- **Radical-agency tell.** The operator takes blame that is only partly theirs ("I should have known", "that was on me"). Flag it for a question, not a diagnosis.
+- **Pace mismatch.** The client wants more speed than the scope supports, and the operator absorbs the gap. The transcript shows the gap and nobody names it.
 
 ## Workflow
 
-1. **Load inputs** — pasted text, file paths, or auto-discovery (see Input modes).
-2. **Read the full transcripts.** Don't skim. Sentiment + sequence matter.
-3. **Apply each lens.** Walk GRPI, then walk Rachael-specific patterns. For each potential signal, capture: the excerpt that triggered it, which lens, and the candidate question.
-4. **Filter aggressively.** **Strategic curiosity, not all curiosity.** A signal is worth surfacing only if asking the question could change the next decision Rachael makes. Cut anything that's interesting-but-actionless. Target output: 3-7 questions, not 15.
-5. **Rank.** Lead with the question that, if Rachael asked it tomorrow, would move the most. Bury the lower-stakes ones at the bottom.
-6. **Format.** For a manual/local run, see "Manual/local output format" below. Scheduled reports use the repository contract named under "Codex automation."
-7. **Deliver.** For a manual/local run, save to `~/Claude-Work/PROJECTS/dissonance-radar/briefs/<YYYY-MM-DD>.md` and print the path. In scheduled mode, let the Codex automation post each successful report through the connected Slack tool and record only successfully posted meetings in automation memory.
+1. **Load config** with `scripts/load_config.py`, then load the transcript inputs the mode allows.
+2. **Read the full transcripts.** Sentiment and sequence matter.
+3. **Apply each lens.** For every candidate signal, keep the excerpt, the lens, and the question.
+4. **Filter.** A signal is worth surfacing only if asking could change the next decision. Cut interesting-but-actionless notes. Target 3–7 questions, not 15.
+5. **Rank.** Lead with the question that would move the most if asked next.
+6. **Format.** Manual runs use the format below. Scheduled runs use the report contract named in automation ops, when that file exists.
+7. **Deliver.** In generic mode, return the questions in the conversation. In configured mode, a manual run may also save `paths.briefs_dir/<YYYY-MM-DD>.md` when that directory's parent exists, and should print the path. Scheduled delivery is defined in automation ops. Do not post to Slack from a manual run unless the user asked you to operate the automation.
 
-## Manual/local output format
+## Manual output format
 
 ```markdown
 # Worth Asking — <YYYY-MM-DD>
-**Sources:** <list of transcripts read, with file paths or "pasted">
+**Sources:** <transcripts read, with paths or "pasted">
 **Mode:** <manual | scheduled-EOD>
 
 ## 1. <The question, as a question>
 **Lens:** <G | R | P | I | disappearance | sentiment-shift | etc.>
 **Trigger:**
 > [<speaker>] "<one-sentence excerpt>"
-> — <source, e.g. "AYMG 2026-06-04 strategy">
+> — <source, e.g. "Northwind Example 2026-06-04 strategy">
 
-<2-3 sentence read on why this is worth asking. What changes if Rachael asks it. What changes if she doesn't.>
+<2-3 sentences on why this is worth asking. What changes if it is asked. What changes if it is not.>
 
-**Next move:** <ONE sentence, exactly one of: "ask [stakeholder] directly in next 1:1" / "raise in next meeting opener" / "ask yourself before [trigger]" / "just notice for now". No multi-step paragraphs, no nested inward-then-outward chains.>
+**Next move:** <ONE sentence, exactly one of: "ask [stakeholder] directly in next 1:1" / "raise in next meeting opener" / "ask yourself before [trigger]" / "just notice for now". No multi-step paragraphs.>
 
 ## 2. ...
 
@@ -88,51 +109,26 @@ Full pattern catalog is in `references/lenses.md`. Load it when needed. Brief ve
 ---
 ## What I did NOT flag (and why)
 
-<Optional. 1-3 bullets on signals you considered but cut because they wouldn't change a decision. Helps Rachael calibrate the filter over time.>
+<Optional. 1-3 bullets on signals cut because they would not change a decision.>
 ```
 
 ## Voice
 
-Strategically curious, not anxious. Warm, not alarmist. "Worth asking, not urgent" is the tone. The skill's job is to help Rachael notice — not to overwhelm her. If the day was actually quiet, say so. **An empty radar is a valid output.** Don't manufacture dissonance.
+Strategically curious, not anxious. Warm, not alarmist. "Worth asking, not urgent" is the tone. If the day was quiet, say so. **An empty radar is a valid output.** Do not manufacture dissonance.
 
-**When the signal is about Rachael's own pattern (radical-agency tells, pace mismatch, commit drift), stay observational, not diagnostic.** Surface the pattern with a question; don't interpret her psychology. "What if the non-answer wasn't yours to absorb?" beats "you have a tendency to absorb." She's the one diagnosing — the radar just notices.
+When the signal is the operator's own pattern (radical-agency tells, pace mismatch, commit drift), stay observational. Surface it as a question. "What if the non-answer was not yours to absorb?" rather than a verdict about their psychology.
 
-**Lead next-move suggestions with inquiry, not prescription, when the transcript shows emotion.** If someone is processing, nervous, grieving, distressed, or making a statement that could be grief OR a scope ask, open the next move with an inquiry-style question that lets Rachael ask before solving — *"I'm hearing this is a lot — can you walk me through what's in your head right now?"* / *"Where is this coming from for you?"* / *"Tell me more about that."* Then layer the tactical follow-up. The point of the radar is to spark dialogue, so the next move should model the dialogue, not jump past it.
+When the transcript shows emotion, lead the next move with inquiry, then a tactical follow-up. Someone processing, nervous, grieving, or distressed may be naming a feeling or a scope change. Ask before solving.
 
-No "ensure / utilize / facilitate." No "needs fixing" — "needs to be fixed." Match Rachael's voice rules in `~/Claude-Work/ABOUT-ME/my-voice.md`.
+No "ensure / utilize / facilitate." Prefer "needs to be fixed" over "needs fixing." When `paths.voice_file` exists, match that file. If it does not, keep this voice and do not invent a style guide.
 
-## Codex automation
+## Related context
 
-The active scheduled Radar is `/Users/rachaelquisel/.codex/automations/dissonance-radar/automation.toml`. Its generated prompt points to the versioned operating contract at `prompts/codex-automation.md`. It runs at 2:00 AM and 10:00 AM Pacific and uses connected Google Calendar, Airtable, Google Drive, and XRAY Slack tools. Scheduled Drive searches and reads are authorized to run without user participation; missing access must produce an actionable failure rather than an unattended question. Local execution still requires the host and Codex scheduler to be available. The Codex app currently records it with `execution_environment = "local"`; do not describe it as a Codex cloud execution target.
+These are optional. They are not part of this package. If a skill is not installed, or a path from config is missing, skip it and continue. A pasted transcript is enough for a manual review.
 
-`prompts/report-instructions.md` in the `RachaelQuisel/dissonance-radar` repository is the canonical contract for scheduled output. Do not duplicate or override its source labels, evidence rules, voice rules, empty-radar form, or next-move constraints here. The manual/local format above remains the contract for skill runs outside the scheduled automation.
-
-**How the fire works, end to end:**
-
-1. Codex fires at 2:00 AM and 10:00 AM Pacific.
-2. The automation compares 14 days of approved client calendar events with Debrief. A missing transcript triggers Drive recovery; only unresolved gaps produce deduplicated source-gap notices. A prior source-exception report suppresses duplicate delivery.
-3. It inventories 14 days of approved Debrief metadata and adds eligible IDs to the durable pending ledger.
-4. It searches each approved Slack channel for pending Airtable record IDs and marks confirmed existing posts as processed.
-5. Pending records absent from Slack trigger one client report; successful meetings from the last seven days remain comparison context.
-6. It fetches transcripts by exact record ID and recovers missing or truncated text from verified matching Drive files. It reads complete files before analysis; an unresolved client does not block other clients.
-7. Codex posts through the connected Slack tool to the client's exact approved huddle.
-8. Only record IDs from successful sends move from pending to processed; failed clients remain pending without an age cutoff.
-
-**Operate cheatsheet.** Use the Codex automation as the source of truth:
-
-| Action | Command |
-|---|---|
-| Inspect the active contract | `sed -n '1,260p' /Users/rachaelquisel/.codex/automations/dissonance-radar/automation.toml` |
-| Inspect pending and processed IDs | `python3 /Users/rachaelquisel/Documents/Airtable/dissonance-radar/scripts/codex_state.py show` |
-| Run one non-posting diagnostic | `python3 scripts/run_one_transcript.py --record-id <rec...> --client <ccres\|cc\|gol>` |
-| Trigger the GitHub fallback manually | `gh workflow run dissonance-radar.yml --repo RachaelQuisel/dissonance-radar` |
-
-For a Slack failure, verify that the connected installation lists XRAY (`T01AU5GUT9B`), that the exact destination is one of the two allowlisted huddle channels, and that `slack_send_message` returned a message link or identifier. The scheduled Codex path does not use `SLACK_BOT_TOKEN`. A generated report without a successful connected-tool response is failed delivery and remains retryable.
-
-## Related skills
-
-- `meeting-prep` — pre-meeting brief (BEFORE conversations). Complement, not overlap.
-- `gem-miner` — daily scheduled mining for funny/sweet quotes. Same scheduling shape, different lens.
-- `humanizing` — apply if Rachael decides to actually send one of the questions as a message (turns the question into her voice for delivery)
-- `~/Claude-Work/ABOUT-ME/my-voice.md` — voice rules
-- `references/lenses.md` — full pattern catalog with worked examples
+- `meeting-prep` — a pre-meeting brief. Complement, not overlap. Use only if it is installed.
+- `gem-miner` — a different daily pass, for lines worth keeping rather than questions worth asking. Use only if it is installed.
+- `humanizing` — only if the user decides to send one of these questions and that skill is installed.
+- [lenses](references/lenses.md) — full pattern catalog.
+- [Drive transcript recovery](references/google-drive-transcripts.md) — only when configured Drive recovery is in use.
+- [automation ops](references/automation-ops.md) — only when operating or debugging the scheduled automation.

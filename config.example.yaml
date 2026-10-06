@@ -1,0 +1,57 @@
+# Copy this file to config.local.yaml and replace every value.
+# config.local.yaml is gitignored. Do not commit it.
+#
+# Worth Asking loads config.local.yaml at runtime. If that file is missing, the
+# skill reviews only a transcript you paste or a file path you name. It does not
+# assume clients, accounts, channels, or local paths.
+#
+# manual_clients is the local review list. scheduled_clients is the shorter
+# allowlist the scheduled automation may post for. A longer manual list is
+# intentional: you can review a client by hand without auto-posting it.
+# Every name below is a fake placeholder.
+
+operator_name: "Alex Example"
+
+work_email: "alex@example.com"
+drive_folder_id: "EXAMPLEDRIVEFOLDERID000000001"
+drive_folder_url: "https://drive.google.com/drive/folders/EXAMPLEDRIVEFOLDERID000000001"
+
+slack_workspace_name: "Example Workspace"
+slack_workspace_id: "T00000000"
+slack_channels:
+  - name: "example-huddle-a"
+    id: "C0000000001"
+  - name: "example-huddle-b"
+    id: "C0000000002"
+
+manual_clients:
+  - "Northwind Example"
+  - "Contoso Example"
+  - "Fabrikam Example"
+scheduled_clients:
+  - "Northwind Example"
+  - "Contoso Example"
+
+paths:
+  home: "~"
+  prepare_sources: "~/example-radar/prepare_sources.py"
+  briefs_dir: "~/example-radar/briefs"
+  voice_file: "~/example-radar/voice.md"
+  automation_toml: "~/.codex/automations/example-radar/automation.toml"
+  state_json: "~/.codex/automations/example-radar/state.json"
+  state_script: "~/example-radar/scripts/codex_state.py"
+  run_one_script: "scripts/run_one_transcript.py"
+  transcript_example: "~/example-radar/transcripts/Northwind-Example-2026-08-25-Weekly.md"
+  report_contract_repo: "example-org/example-radar"
+  report_contract_path: "prompts/report-instructions.md"
+  automation_prompt: "prompts/codex-automation.md"
+  workflow_file: "example-radar.yml"
+
+optional_skills:
+  - "meeting-prep"
+  - "gem-miner"
+  - "humanizing"
+
+# Optional private calibration. The sample line is fake. Replace it, or leave the list empty.
+pattern_notes:
+  - "Example only: a stakeholder stopped attending and nobody asked why."

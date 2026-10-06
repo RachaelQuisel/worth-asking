@@ -1,176 +1,192 @@
-# Dissonance Lenses — full pattern catalog
+# Dissonance lenses
 
-Load this when SKILL.md's brief version isn't enough — when a signal is borderline and you need to check whether it fits a pattern, or when calibrating which questions to filter out.
+Load this when the brief lenses in SKILL.md are not enough: a signal is borderline, or you are deciding what to filter out.
 
----
+These patterns are generic. If the loaded config includes `pattern_notes`, use those notes as extra calibration for this operator. Do not repeat a note verbatim unless they asked to see it. If `pattern_notes` is missing or empty, do not invent personal history, a coaching transcript, or a stakeholder who is not in the source.
 
-## GRPI — Evan Michner's framework (2026-06-04 coaching call)
+## GRPI
 
-> "Almost every conflict, if you replay the last 10 years of your career, can be traced back to a few different root sources of conflict."
+Treat conflict as coming from one of four roots: goals, roles, process, or interpersonal friction. Interpersonal friction is often downstream of the other three.
 
 ### G — Goals misalignment
 
-**The shape:** Two parties act aligned until effort allocation forces a tradeoff. The misalignment surfaces as friction over "why aren't you doing X faster" or "why are we spending time on Y."
+**The shape:** Two parties act aligned until effort has to be split. The friction sounds like "why isn't this faster" or "why are we spending time on that."
 
 **Transcript tells:**
-- One stakeholder pushes for speed, another pushes for thoroughness, both think they want "a good product"
-- Disagreement about which feature to build next, with both sides citing "what the user wants"
-- One party measures success by shipped count; another by quality / completeness
+
+- One person pushes for speed, another for thoroughness, and both say they want a good product.
+- They disagree about what to build next, and both cite what the user wants.
+- One person measures shipped count. The other measures completeness.
 
 **Candidate questions:**
-- *"What does success look like for you in 30 days?"*
-- *"If we had to ship something this week, what's the one thing you'd want it to do?"*
-- *"What are we optimizing for here — speed, accuracy, scope, or learning?"*
+
+- "What does success look like for you in 30 days?"
+- "If we had to ship something this week, what is the one thing it should do?"
+- "What are we optimizing for here: speed, accuracy, scope, or learning?"
 
 ### R — Roles misalignment
 
-**The shape:** Two people both think a task is theirs, OR neither thinks it's theirs, OR one is making decisions the other thinks are theirs. The transcript example Rachael named: Cassandra has the contract, the PM was brought in as a "liaison" but thought his role was to manage the build. Two different role models, no shared agreement.
+**The shape:** Two people both think a task is theirs, or neither does, or one is making decisions the other thinks are theirs. A typical case: one person holds the contract, and someone brought in as a liaison thinks their job is to manage the build. Two role models, no shared agreement.
 
 **Transcript tells:**
-- Two people approve/reject the same artifact differently
-- One person says "I'll handle X" and another says "actually I'm already on that"
-- Someone makes a call (priority change, scope change) and another person pushes back later
-- Long pauses or sideways looks when ownership is named
+
+- Two people approve or reject the same artifact differently.
+- One person says they will handle something, and another says they already are.
+- Someone changes priority or scope, and another person pushes back later.
+- Long pauses when ownership is named.
 
 **Candidate questions:**
-- *"Who is the final decision-maker on [X]?"*
-- *"Whose job is it to [Y]?"*
-- *"When [A] and [B] disagree, who breaks the tie?"*
+
+- "Who is the final decision-maker on [X]?"
+- "Whose job is it to [Y]?"
+- "When [A] and [B] disagree, who breaks the tie?"
 
 ### P — Process misalignment
 
-**The shape:** No shared method for getting things done. Decisions get made and unmade because nothing captures them. Each meeting starts from scratch.
+**The shape:** There is no shared method. Decisions get made and unmade because nothing captures them. Each meeting starts from scratch.
 
 **Transcript tells:**
-- "We talked about this last time" — but the speaker doesn't remember what was decided
-- Same topic comes up in three consecutive meetings without resolution
-- Action items get assigned and never followed up on
-- New requirements introduced mid-build with no path to integrate them
+
+- "We talked about this last time," and nobody can say what was decided.
+- The same topic returns for several meetings without a resolution.
+- Action items are assigned and never followed up.
+- New requirements arrive mid-build with no path to take them in.
 
 **Candidate questions:**
-- *"How are we capturing decisions so we don't relitigate them?"*
-- *"What's the path for changing scope mid-sprint?"*
-- *"Can we add a 5-minute open at every meeting to confirm where we are?"*
+
+- "How are we capturing decisions so we do not relitigate them?"
+- "What is the path for changing scope mid-sprint?"
+- "Can we open each meeting with a few minutes to confirm where we are?"
 
 ### I — Interpersonal friction
 
-**The shape:** Two people just don't get along. Often downstream of G/R/P breakdowns but sometimes the root.
+**The shape:** Two people do not get along. Often downstream of goals, roles, or process. Sometimes the root.
 
 **Transcript tells:**
-- Sniping in the transcript ("as I've said before...")
-- One person consistently routes around another
-- Talking past each other in the same meeting
-- One person stops showing up
 
-**Candidate questions:** Usually **don't ask the interpersonal question directly** — it's not Rachael's job to mediate. Instead ask about the structure that surfaces the friction (often a Roles or Goals question). Example: instead of *"Are you two getting along?"* → *"How should we structure decisions when you two disagree?"*
+- Sniping ("as I've said before").
+- One person routes around another.
+- They talk past each other in the same meeting.
+- One person stops showing up.
 
----
+**Candidate questions:** Do not ask the interpersonal question directly. It is not the operator's job to mediate. Ask about the structure that surfaces the friction, usually roles or goals. Instead of "Are you two getting along?", ask "How should we structure decisions when you two disagree?"
 
-## Rachael-specific dissonance patterns
+## Default-mode patterns
 
-These come from Rachael's own self-identified blind spots in the 2026-06-04 coaching session and from session memories. They're not generic — they're tuned to how Rachael's specific default mode (radical agency + speed + avoidance) misses signals.
+These are tuned to a specific default: radical agency, plus speed, plus skipping the hard question. They are still generic. A private `pattern_notes` entry may sharpen them for one operator. It is not required.
 
 ### Disappearance
 
-**The pattern:** A stakeholder who was in the last several meetings/transcripts isn't in this one. Or they're present but silent.
+**The pattern:** A stakeholder who was in the last several meetings is absent, or present and silent.
 
-**Why Rachael misses it:** "I was just like, oh, that's fine. Someone's still telling me what to do." She accepts the simpler reality (fewer voices = clearer instructions) rather than asking the harder question.
+**Why it gets missed:** Fewer voices feel like clearer instructions. The harder question does not get asked.
 
-**Tells in the transcript:**
-- Named participant from prior transcripts absent
-- New person speaking on behalf of an absent person
-- Reference to the absent person in past tense or by name only
+**Tells:**
+
+- A named participant from prior transcripts is absent.
+- A new person speaks for an absent person.
+- The absent person is mentioned in the past tense, or by name only.
+
+Ask only if they were expected to attend. A meeting that is one-to-one by design is not a disappearance. If an operational stakeholder was never invited, ask how they hear about the change.
 
 **Candidate questions:**
-- *"Where is [X]? Are they still on the project?"*
-- *"Is [X] OK with where we've taken this?"*
-- *"Who's representing [X]'s view when they're not here?"*
+
+- "Where is [X]? Are they still on the project?"
+- "Is [X] all right with where this has gone?"
+- "Who is representing [X]'s view when they are not here?"
 
 ### In-meeting disagreement
 
-**The pattern:** Two stakeholders contradict each other in the same conversation. Rachael's tell: "I'll be in the meeting with them and they just start arguing with each other. And I'm like, how did I not [notice]?"
+**The pattern:** Two stakeholders contradict each other in the same conversation, and it is not marked in the moment.
 
-**Why Rachael misses it:** Defense mechanism — avoid and deny. Easier to absorb both contradictory directives than to surface the disagreement.
+**Why it gets missed:** Absorbing both directives is easier than surfacing the disagreement.
 
-**Tells in the transcript:**
-- "But [other stakeholder] said..." — followed by a contradiction
-- Pivot in the room about which direction to take
-- Speakers talking past each other
+**Tells:**
+
+- "But the other person said..." followed by a contradiction.
+- The room pivots about which direction to take.
+- Speakers talk past each other.
 
 **Candidate questions:**
-- *"I'm hearing [X] from [A] and [Y] from [B] — which should I anchor to?"*
-- *"Can we get aligned on [Z] before I keep building?"*
+
+- "I'm hearing [X] from [A] and [Y] from [B]. Which should I anchor to?"
+- "Can we get aligned on [Z] before I keep building?"
 
 ### Sentiment shift
 
-**The pattern:** Same person, different tone, week-over-week. Enthusiasm → curt, or curt → enthusiasm, or measured → frustrated.
+**The pattern:** The same person, a different tone, week over week. Enthusiasm becomes curt, or the reverse.
 
-**Why Rachael misses it:** She's heads-down delivering. Doesn't track week-over-week tone unless the change is dramatic.
+**Why it gets missed:** Delivery work does not track tone unless the change is dramatic.
 
-**Tells:** Need at least one prior transcript to compare. Tone words: "great" / "concerned" / "fine" — even simple word swaps matter.
+**Tells:** You need at least one prior transcript. Small word swaps matter: "great", "concerned", "fine".
 
 **Candidate questions:**
-- *"How are you feeling about the direction right now?"*
-- *"Anything I should know that you haven't said out loud?"*
+
+- "How are you feeling about the direction right now?"
+- "Anything I should know that you have not said out loud?"
 
 ### Topic avoided
 
-**The pattern:** Rachael raises something; conversation moves past it without engagement. Or someone else raises something and Rachael moves past it.
+**The pattern:** Someone raises a subject, and the conversation moves past it. Or the operator raises it and lets it drop.
 
 **Tells:**
-- Question asked → unrelated answer → topic dropped
-- Pivot immediately after a delicate subject
-- "Anyway..." or "moving on..." right after a real question
+
+- A question gets an unrelated answer, then the topic dies.
+- A pivot lands immediately after a delicate subject.
+- "Anyway" or "moving on" follows a real question.
 
 **Candidate questions:**
-- *"I noticed we skipped [X] earlier — want to come back to it?"*
-- *"What's the right time to talk about [X]?"*
+
+- "I noticed we skipped [X] earlier. Want to come back to it?"
+- "What is the right time to talk about [X]?"
 
 ### New vocabulary
 
-**The pattern:** A term enters the conversation that wasn't there before. Sometimes it's a real priority shift the speaker hasn't named. Example: client starts saying "compliance" when they used to say "good enough."
+**The pattern:** A term enters that was not there before. Sometimes it is a priority the speaker has not named. Example: "compliance" replaces "good enough."
 
-**Why Rachael misses it:** It blends with the rest of the conversation. New words don't get flagged unless they're load-bearing.
+**Why it gets missed:** New words blend in unless they are load-bearing.
 
-**Tells:** Word frequency change across recent transcripts. If "audit," "compliance," "deadline," or named-stakeholder names start showing up that weren't there last week, surface it.
+**Tells:** Word frequency changes across recent transcripts. If "audit", "compliance", "deadline", or a stakeholder's name starts appearing, surface it.
 
 **Candidate questions:**
-- *"You mentioned [new term] for the first time today — has something shifted?"*
+
+- "You mentioned [new term] for the first time today. Has something shifted?"
 
 ### Commit drift
 
-**The pattern:** Rachael said in a prior transcript she'd do X. Today's transcript shows it didn't happen, and no one mentions it.
+**The pattern:** A prior transcript records a commitment. Today's transcript shows it did not happen, and nobody mentions it.
 
-**Why this matters:** Drift compounds. Three undone commits in a row erodes trust faster than one undone one.
+**Why this matters:** Drift compounds. Several undone commitments erode trust faster than one.
 
-**Candidate questions** (usually for self, not stakeholder):
-- *"What did I commit to last week that I haven't done? Should I do it, or surface that I'm not going to?"*
+**Candidate questions** (usually for the operator, not the stakeholder):
+
+- "What did I commit to last week that I have not done? Should I do it, or say that I am not going to?"
 
 ### Radical-agency tell
 
-**The pattern:** Rachael says things like "I should have known," "that was on me," "I'll handle it" — when the situation is actually shared responsibility.
+**The pattern:** The operator says "I should have known", "that was on me", or "I'll handle it" when the responsibility is shared.
 
-**Why this matters:** Rachael has named this herself: *"I have like kind of a radical agency. And I'll just like, oh, I must, there must be something going on with me. And like, if I just fix everything on my end, which is not untrue, but it's not only me."*
+**Why this matters:** The default is to assume the friction is theirs to fix. That can be partly true and still be incomplete. The question is which part belongs to someone else.
 
-**Candidate questions** (for self):
-- *"What part of this is actually mine vs. theirs?"*
-- *"What question would surface the other-side piece of this?"*
+**Candidate questions** (for the operator):
+
+- "What part of this is actually mine, and what part is theirs?"
+- "What question would surface the other side of this?"
 
 ### Pace mismatch
 
-**The pattern:** Client expects faster delivery than scope/billing allows. Rachael absorbs the gap by working until 2am. Transcript shows the gap (e.g., "do as much as you can in 30 days" for a 6-month scope) but no one names it.
+**The pattern:** The client expects faster delivery than the scope supports. The operator absorbs the gap by working unsustainably. The transcript shows the gap, for example a short deadline on a long scope, and nobody names it.
 
-**Why this matters:** The 2am pattern is unsustainable AND a signal that the scope conversation didn't happen. Rachael's spouse called this out: *"You're not a heart surgeon. No one's going to die."*
+**Why this matters:** The overwork is a signal that the scope conversation did not happen.
 
 **Candidate questions:**
-- *"What's the right pace given the actual scope here?"*
-- *"What gets cut if we stay on the original budget?"*
 
----
+- "What is the right pace given the actual scope?"
+- "What gets cut if we stay on the original budget?"
 
-## Calibration notes
+## Calibration
 
-- **Cut signals that don't change a decision.** Interesting-but-actionless is noise.
-- **Three commits a meeting is normal. Six is a smell.** Use the volume of "I'll do X" statements as a proxy for whether Rachael is taking on too much.
-- **An empty radar is a valid output.** Some days are just quiet. Say so; don't manufacture.
-- **Cross-client signals are rare but high-leverage.** If the same vocabulary shows up at two clients in the same week, that's usually a Rachael-internal shift, not a client one.
+- Cut signals that do not change a decision. Interesting-but-actionless is noise.
+- Three commitments in a meeting is normal. Six is a smell. Use the volume of "I'll do X" as a proxy for taking on too much.
+- An empty radar is a valid output. Some days are quiet. Say so.
+- Cross-client signals are rare and high-leverage. The same new vocabulary at two clients in one week is often the operator's shift, not the client's.
