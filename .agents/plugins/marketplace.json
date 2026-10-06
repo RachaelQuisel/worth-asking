@@ -1,0 +1,20 @@
+{
+  "name": "worth-asking",
+  "interface": {
+    "displayName": "Worth Asking"
+  },
+  "plugins": [
+    {
+      "name": "worth-asking",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

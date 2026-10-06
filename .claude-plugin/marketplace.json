@@ -1,0 +1,14 @@
+{
+  "name": "worth-asking",
+  "description": "Marketplace for the Worth Asking transcript review plugin.",
+  "owner": {
+    "name": "Rachael Quisel"
+  },
+  "plugins": [
+    {
+      "name": "worth-asking",
+      "source": "./",
+      "description": "Surface high-leverage questions missed in client conversations."
+    }
+  ]
+}
