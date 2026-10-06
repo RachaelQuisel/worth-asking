@@ -10,7 +10,9 @@
     "category": "Productivity",
     "capabilities": [],
     "defaultPrompt": "Use $worth-asking to find the highest-leverage questions I missed asking.",
-    "developerName": "Rachael Quisel"
+    "developerName": "Rachael Quisel",
+    "logo": "./assets/worth-asking.png",
+    "composerIcon": "./assets/worth-asking.png"
   },
   "author": {
     "name": "Rachael Quisel"

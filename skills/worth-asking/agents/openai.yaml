@@ -1,4 +1,6 @@
 interface:
+  icon_small: "./assets/worth-asking.png"
+  icon_large: "./assets/worth-asking.png"
   display_name: "Worth Asking"
   short_description: "Surface missed questions from client conversations"
   default_prompt: "Use $worth-asking to find the highest-leverage questions I missed asking."
